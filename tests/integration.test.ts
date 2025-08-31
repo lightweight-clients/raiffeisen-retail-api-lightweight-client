@@ -10,7 +10,7 @@ import {
 import { InternalClient } from '../src/client/internal_client';
 
 const RAIF_USERNAME = process.env.RAIF_USERNAME || '';
-const RAIF_HASHED_PASSWORD: string & { length: 64 } = process.env.RAIF_HASHED_PASSWORD || '';
+const RAIF_HASHED_PASSWORD: string = process.env.RAIF_HASHED_PASSWORD || '';
 
 describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client tests', () => {
   let client: InternalClient | null = null;
@@ -19,13 +19,15 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
   beforeAll(() => {
     expect(!!RAIF_USERNAME).toBe(true);
     expect(!!RAIF_HASHED_PASSWORD).toBe(true);
+    expect(RAIF_HASHED_PASSWORD.length).toBe(64);
   });
 
   test('authorize', async () => {
+    // @ts-expect-error Password length check
     const response = await authorize(RAIF_USERNAME, RAIF_HASHED_PASSWORD);
     console.log(response);
     expect(response['cookies']).toBeDefined();
-    expect(response['cookies']).includes('rzbretv4_HolosToken');
+    expect(response['cookies']).toContain('rzbretv4_HolosToken');
 
     client = response;
   });

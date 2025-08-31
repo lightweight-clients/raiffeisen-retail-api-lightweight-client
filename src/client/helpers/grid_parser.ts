@@ -31,6 +31,4 @@ export const parseRow = <T extends Record<string, string>>(
 export const parseGrid = <T extends Record<string, string>>(
   data: readonly string[][],
   columns: readonly string[],
-): T[] => {
-  return data.map(row => parseRow<T>(row, columns));
-};
+): T[] => data.map(row => parseRow<T>(row, columns));

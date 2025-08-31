@@ -8,7 +8,6 @@ import {
   RetailAccountTurnoverTransactionPreviewMasterDetailS,
 } from './grids';
 
-
 const fetchGrid = async <Params, ApiResult, TGridData extends GridData, Result extends Record<TGridData['columns'][number], string>>(
   client: InternalClient,
   endpoint: string,
@@ -25,7 +24,6 @@ const fetchGrid = async <Params, ApiResult, TGridData extends GridData, Result e
 
   return parseGrid<Result>(mappedResult, gridData.columns);
 };
-
 
 /**
  * Authorizes a user and returns an authenticated InternalClient instance.
@@ -58,7 +56,6 @@ export const authorize = async (
   return client;
 };
 
-
 export type GetAllAccountBalanceResponseItem =
   Record<typeof RetailAccountBalancePreviewFlatL['columns'][number], string>;
 
@@ -66,16 +63,13 @@ export type GetAllAccountBalanceResponse = GetAllAccountBalanceResponseItem[];
 
 export const getAllAccountBalance = async (
   client: InternalClient,
-): Promise<GetAllAccountBalanceResponse> => {
-  return fetchGrid<object, string[][], typeof RetailAccountBalancePreviewFlatL, GetAllAccountBalanceResponseItem>(
-    client,
-    'DataService.svc/GetAllAccountBalance',
-    RetailAccountBalancePreviewFlatL,
-    {},
-    res => res,
-  );
-};
-
+): Promise<GetAllAccountBalanceResponse> => fetchGrid<object, string[][], typeof RetailAccountBalancePreviewFlatL, GetAllAccountBalanceResponseItem>(
+  client,
+  'DataService.svc/GetAllAccountBalance',
+  RetailAccountBalancePreviewFlatL,
+  {},
+  res => res,
+);
 
 /**
  * Fetches reserved funds for a transactional account.
@@ -97,16 +91,13 @@ export type GetTransactionalAccountReservedFundsResponse =
 export const getTransactionalAccountReservedFunds = async (
   client: InternalClient,
   params: GetTransactionalAccountReservedFundsParams,
-): Promise<GetTransactionalAccountReservedFundsResponse> => {
-  return fetchGrid<object, string[][], typeof RetailAccountReservedFundsPreviewFlat, GetTransactionalAccountReservedFundsResponseItem>(
-    client,
-    'DataService.svc/GetTransactionalAccountReservedFunds',
-    RetailAccountReservedFundsPreviewFlat,
-    params,
-    res => res,
-  );
-};
-
+): Promise<GetTransactionalAccountReservedFundsResponse> => fetchGrid<object, string[][], typeof RetailAccountReservedFundsPreviewFlat, GetTransactionalAccountReservedFundsResponseItem>(
+  client,
+  'DataService.svc/GetTransactionalAccountReservedFunds',
+  RetailAccountReservedFundsPreviewFlat,
+  params,
+  res => res,
+);
 
 /**
  * Fetches turnover transactions for a transactional account.
@@ -139,12 +130,10 @@ export type GetTransactionalAccountTurnoverResponse =
 export const getTransactionalAccountTurnover = async (
   client: InternalClient,
   params: GetTransactionalAccountTurnoverParams,
-): Promise<GetTransactionalAccountTurnoverResponse> => {
-  return fetchGrid<object, string[][][][], typeof RetailAccountTurnoverTransactionPreviewMasterDetailS, GetTransactionalAccountTurnoverResponseItem>(
-    client,
-    'DataService.svc/GetTransactionalAccountTurnover',
-    RetailAccountTurnoverTransactionPreviewMasterDetailS,
-    params,
-    (response) => response[0][1],
-  );
-};
+): Promise<GetTransactionalAccountTurnoverResponse> => fetchGrid<object, string[][][][], typeof RetailAccountTurnoverTransactionPreviewMasterDetailS, GetTransactionalAccountTurnoverResponseItem>(
+  client,
+  'DataService.svc/GetTransactionalAccountTurnover',
+  RetailAccountTurnoverTransactionPreviewMasterDetailS,
+  params,
+  (response) => response[0][1],
+);
