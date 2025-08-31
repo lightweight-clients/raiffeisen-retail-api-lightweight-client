@@ -1,0 +1,60 @@
+{
+  "name": "@lightweight-clients/raiffeisen-retail-api-lightweight-client",
+  "version": "1.0.0-alpha12",
+  "description": "Lightweight Raiffeisen Retail API client.",
+  "source": "src/client/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "raiffeisen",
+    "retail",
+    "api",
+    "client",
+    "fetch",
+    "async",
+    "lightweight",
+    "no-deps",
+    "tree-shakeable",
+    "esm"
+  ],
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check-updates": "npm-check-updates --errorLevel 2",
+    "knip": "knip",
+    "lint": "eslint .",
+    "generate-grid-types": "tsx src/generator/index.ts",
+    "test": "vitest --run",
+    "build": "tsc",
+    "prepack": "npm run check-updates && npm run knip && npm run lint && npm run test && npm run build"
+  },
+  "type": "module",
+  "author": "@lightweight-clients",
+  "license": "MIT",
+  "homepage": "https://github.com/lightweight-clients/raiffeisen-retail-api-lightweight-client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lightweight-clients/raiffeisen-retail-api-lightweight-client"
+  },
+  "bugs": {
+    "url": "https://github.com/lightweight-clients/raiffeisen-retail-api-lightweight-client/issues"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "eslint": "^9.34.0",
+    "npm-check-updates": "^18.0.3",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "knip": "^5.63.0"
+  }
+}
