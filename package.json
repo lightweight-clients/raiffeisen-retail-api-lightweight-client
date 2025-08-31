@@ -23,13 +23,15 @@
     "LICENSE"
   ],
   "scripts": {
-    "check-updates": "npm-check-updates --errorLevel 2",
-    "knip": "knip",
-    "lint": "eslint .",
+    "check:updates": "npm-check-updates --errorLevel 2",
+    "check:lockfile": "pnpm install --lockfile-only --frozen-lockfile",
+    "check:knip": "knip",
+    "check:lint": "eslint .",
+    "check:test": "vitest --run",
+    "check:ts": "tsc --noEmit",
     "generate-grid-types": "tsx src/generator/index.ts",
-    "test": "vitest --run",
     "build": "tsc",
-    "prepack": "pnpm run check-updates && pnpm run knip && pnpm run lint && pnpm run test && pnpm run build"
+    "prepack": "pnpm run check:lint && pnpm run check:knip && pnpm run check:updates && pnpm run check:lockfile && pnpm run check:test && pnpm run build"
   },
   "type": "module",
   "author": "@lightweight-clients",
