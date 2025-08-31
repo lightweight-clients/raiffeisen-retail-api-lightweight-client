@@ -1,6 +1,6 @@
 {
   "name": "@lightweight-clients/raiffeisen-retail-api-lightweight-client",
-  "version": "1.0.0-alpha12",
+  "version": "1.0.0-alpha13",
   "description": "Lightweight Raiffeisen Retail API client.",
   "source": "src/client/index.ts",
   "main": "dist/index.js",
@@ -23,13 +23,16 @@
     "LICENSE"
   ],
   "scripts": {
-    "check-updates": "npm-check-updates --errorLevel 2",
+    "check:updates": "npm-check-updates --errorLevel 2",
+    "check:lockfile": "pnpm install --lockfile-only --frozen-lockfile",
+    "check:ts": "tsc --noEmit",
     "knip": "knip",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "generate-grid-types": "tsx src/generator/index.ts",
     "test": "vitest --run",
     "build": "tsc",
-    "prepack": "pnpm run check-updates && pnpm run knip && pnpm run lint && pnpm run test && pnpm run build"
+    "prepack": "pnpm run lint && pnpm run knip && pnpm run check:updates && pnpm run check:lockfile && pnpm run test && pnpm run build"
   },
   "type": "module",
   "author": "@lightweight-clients",
