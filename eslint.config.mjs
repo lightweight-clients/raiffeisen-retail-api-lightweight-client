@@ -21,7 +21,6 @@ const commonRules = {
   '@typescript-eslint/no-explicit-any': 'error',
   '@typescript-eslint/no-non-null-assertion': 'error',
   indent: ['error', 2],
-  'linebreak-style': ['error', 'unix'],
   quotes: ['error', 'single'],
   semi: ['error', 'always'],
   'no-trailing-spaces': 'error',
