@@ -1,0 +1,3 @@
+﻿onlyBuiltDependencies:
+  - esbuild
+  - oxc-resolver
