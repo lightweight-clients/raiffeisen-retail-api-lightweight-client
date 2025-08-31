@@ -1,12 +1,12 @@
-﻿import { InternalClient } from './internal_client';
-import { AuthorizeParams, AuthorizeResult } from './types';
-import { parseGrid } from './helpers/grid_parser';
+﻿import { InternalClient } from './internal_client.js';
+import { AuthorizeParams, AuthorizeResult } from './types.js';
+import { parseGrid } from './helpers/grid_parser.js';
 import {
   GridData,
   RetailAccountBalancePreviewFlatL,
   RetailAccountReservedFundsPreviewFlat,
   RetailAccountTurnoverTransactionPreviewMasterDetailS,
-} from './grids';
+} from './grids.js';
 
 const fetchGrid = async <Params, ApiResult, TGridData extends GridData, Result extends Record<TGridData['columns'][number], string>>(
   client: InternalClient,
