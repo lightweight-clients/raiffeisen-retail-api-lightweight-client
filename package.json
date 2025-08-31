@@ -29,7 +29,7 @@
     "generate-grid-types": "tsx src/generator/index.ts",
     "test": "vitest --run",
     "build": "tsc",
-    "prepack": "npm run check-updates && npm run knip && npm run lint && npm run test && npm run build"
+    "prepack": "pnpm run check-updates && pnpm run knip && pnpm run lint && pnpm run test && pnpm run build"
   },
   "type": "module",
   "author": "@lightweight-clients",
