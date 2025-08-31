@@ -42,4 +42,10 @@ export const generateGridTypes = async (): Promise<void> => {
   fs.writeFileSync('./src/client/grids.ts', ts);
 };
 
-await generateGridTypes();
+async function main() {
+  await generateGridTypes();
+}
+
+if (require.main === module) {
+  main();
+}
