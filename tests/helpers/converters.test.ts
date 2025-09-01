@@ -1,5 +1,5 @@
 ﻿import { describe, it, expect } from 'vitest';
-import { dateToSerbianTimestamp } from '../../src/client';
+import { dateToSerbianTimestamp } from '../../src/client/index.js';
 
 describe('dateToSerbianTimestamp', () => {
   it('formats a typical date correctly', () => {
