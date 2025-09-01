@@ -1,12 +1,4 @@
-﻿/**
- * Error thrown when an API call returns 401 Unauthorized.
- */
-export class UnauthorizedError extends Error {
-  constructor(message: string, options?: ErrorOptions) {
-    super(message, options);
-    this.name = 'UnauthorizedError';
-  }
-}
+﻿import { UnauthorizedError } from './errors/unauthorized-error.js';
 
 /**
  * Internal API client for Raiffeisen Retail API.
@@ -29,6 +21,11 @@ export class InternalClient {
   /**
    * Makes a POST request to the given endpoint with the provided body.
    * Handles cookies and error reporting.
+   * @param endpoint - The API endpoint (relative to base URL).
+   * @param body - The request body to be sent as JSON.
+   * @returns Promise resolving to the parsed JSON response.
+   * @throws UnauthorizedError if the response status is 401.
+   * @throws Error for other non-200 responses with status and body details.
    */
   public async call<T, R>(endpoint: string, body: T): Promise<R> {
     const absoluteUrl = `${InternalClient.BASE_ENDPOINT}/${endpoint}`;
