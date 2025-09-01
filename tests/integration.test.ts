@@ -23,7 +23,6 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
   });
 
   test('authorize', async () => {
-    // @ts-expect-error Password length check
     const response = await authorize(RAIF_USERNAME, RAIF_HASHED_PASSWORD);
     console.log(response);
     expect(response['cookies']).toBeDefined();

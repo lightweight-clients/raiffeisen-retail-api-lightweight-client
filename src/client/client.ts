@@ -35,7 +35,7 @@ const fetchGrid = async <Params, ApiResult, TGridData extends GridData, Result e
  */
 export const authorize = async (
   username: string,
-  hashedPassword: string & { length: 64 },
+  hashedPassword: string,
 ): Promise<InternalClient> => {
   if (hashedPassword.length !== 64) {
     throw new Error('Password must be Argon2-hashed. ' +
