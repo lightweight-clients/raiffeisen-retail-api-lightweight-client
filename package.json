@@ -25,14 +25,14 @@
   "scripts": {
     "check:updates": "npm-check-updates --errorLevel 2",
     "check:lockfile": "pnpm install --lockfile-only --frozen-lockfile",
-    "check:ts": "tsc --noEmit",
+    "check:ts": "tsc --noEmit && tsc --project tsconfig.dev.json --noEmit",
     "knip": "knip",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "generate-grid-types": "tsx src/generator/index.ts",
+    "generate-grid-types": "tsx src/generator/generate.ts",
     "test": "vitest --run",
     "build": "tsc",
-    "prepack": "pnpm run lint && pnpm run knip && pnpm run check:updates && pnpm run check:lockfile && pnpm run test && pnpm run build"
+    "prepack": "pnpm run lint && pnpm run knip && pnpm run check:updates && pnpm run check:lockfile && pnpm run check:ts && pnpm run test && pnpm run build"
   },
   "type": "module",
   "author": "@lightweight-clients",

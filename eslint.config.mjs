@@ -76,28 +76,11 @@ export default [
 
   // File-specific config for TypeScript
   {
-    files: ['tests/**/*.ts'],
+    files: ['tests/**/*.ts', 'src/generator/**/*.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.test.json',
-        tsconfigRootDir: __dirname,
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-    },
-    rules: commonRules,
-  },
-
-  // File-specific config for TypeScript
-  {
-    files: ['src/generator/**/*.ts'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        project: './tsconfig.gen.json',
+        project: './tsconfig.dev.json',
         tsconfigRootDir: __dirname,
         sourceType: 'module',
       },
