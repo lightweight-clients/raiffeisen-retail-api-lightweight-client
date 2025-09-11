@@ -29,7 +29,7 @@ export const parseRow = <T extends keyof GridRow>(
   gridName: T,
 ): GridRow[T] => {
   if (!storedGridDefinitions) {
-    throw new Error('Grid definitions not loaded. Call initGridValidator first.');
+    throw new Error('Grid definitions not loaded. Call initGridParser first.');
   }
 
   const result: Record<string, string> = {};
