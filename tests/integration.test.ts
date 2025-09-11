@@ -6,15 +6,16 @@ import {
   getTransactionalAccountTurnover,
   dateToSerbianTimestamp,
   RetailAccountBalancePreviewFlatL,
-} from '../src/client';
-import { InternalClient } from '../src/client/internal_client';
+} from '../src/client/index.js';
+import { InternalClient } from '../src/client/internal-client.js';
 
 const RAIF_USERNAME = process.env.RAIF_USERNAME || '';
 const RAIF_HASHED_PASSWORD: string = process.env.RAIF_HASHED_PASSWORD || '';
+const TIMEOUT_MS = 5000;
 
 describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client tests', () => {
   let client: InternalClient | null = null;
-  let accountData: Record<typeof RetailAccountBalancePreviewFlatL['columns'][number], string>;
+  let accountData: Record<keyof RetailAccountBalancePreviewFlatL, string>;
 
   beforeAll(() => {
     expect(!!RAIF_USERNAME).toBe(true);
@@ -23,14 +24,13 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
   });
 
   test('authorize', async () => {
-    // @ts-expect-error Password length check
     const response = await authorize(RAIF_USERNAME, RAIF_HASHED_PASSWORD);
     console.log(response);
     expect(response['cookies']).toBeDefined();
     expect(response['cookies']).toContain('rzbretv4_HolosToken');
 
     client = response;
-  });
+  }, TIMEOUT_MS);
 
   test('getAllAccountBalance', async (context) => {
     if (!client) {
@@ -51,7 +51,7 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
     }
 
     accountData = response[0];
-  });
+  }, TIMEOUT_MS);
 
   test('getTransactionalAccountReservedFunds', async (context) => {
     if (!client || !accountData) {
@@ -71,7 +71,7 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
     const totalReservedFunds = response.reduce((sum, item) => sum + parseFloat(item.Amount), 0);
     expect(totalReservedFunds)
       .closeTo(parseFloat(accountData.Balance) - parseFloat(accountData.AvailableBalance), 0.01);
-  });
+  }, TIMEOUT_MS);
 
   test('getTransactionalAccountTurnover', async (context) => {
     if (!client || !accountData) {
@@ -101,5 +101,5 @@ describe.skipIf(!RAIF_USERNAME || !RAIF_HASHED_PASSWORD)('raiffeisen api client 
     expect(response).toBeDefined();
     expect(Array.isArray(response)).toBe(true);
     expect(response.length).toBeGreaterThan(0);
-  });
+  }, TIMEOUT_MS);
 });

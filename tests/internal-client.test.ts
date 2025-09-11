@@ -1,7 +1,8 @@
 ﻿/* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { InternalClient, UnauthorizedError } from '../src/client/internal_client';
+import { InternalClient } from '../src/client/internal-client.js';
+import { UnauthorizedError } from '../src/client/errors/unauthorized-error.js';
 
 describe('InternalClient', () => {
   const DEFAULT_RESPONSE_HEADERS_MOCK = {

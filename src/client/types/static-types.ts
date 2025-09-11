@@ -49,3 +49,14 @@ export interface AuthorizeResult {
   CertificateExpirationDate: string | null;
   DaysToExpiration: number;
 }
+
+export type GridDefinitions = Record<string, {
+  Name: string;
+  Columns: { Name: string }[];
+}>;
+
+export type GetSystemParametersResponse = {
+  Result: {
+    GridDefinitions: GridDefinitions;
+  };
+};
