@@ -1,8 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "noEmit": true,
-    "rootDir": "./"
+    "rootDir": "./",
+    "types": [
+      "vitest",
+      "node"
+    ]
   },
   "include": [
     "src/generator/**/*",

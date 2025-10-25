@@ -1,3 +1,5 @@
+.env
+.secrets
 .secrets.json
 .idea
 node_modules

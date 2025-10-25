@@ -1,4 +1,4 @@
-﻿# Raiffeisen Retail API Client
+# Raiffeisen Retail API Client
 
 [![NPM Version](https://img.shields.io/npm/v/raiffeisen-retail-api)](https://www.npmjs.com/package/raiffeisen-retail-api)
 ![NPM Downloads](https://img.shields.io/npm/dm/raiffeisen-retail-api)
@@ -122,7 +122,7 @@ API accepts only hashed passwords. There are 2 ways to get the hashed password:
 If the bank updates grid definitions, regenerate `src/client/grids.ts`:
 
 ```bash
-pnpm run generate-grid-types
+npm run generate-grid-types
 ```
 
 ## Environment Variables for Integration Tests
@@ -139,7 +139,7 @@ Set these in your environment before running tests.
 Run all tests using:
 
 ```bash
-pnpm test
+npm test
 ```
 
 ## Linting
@@ -147,7 +147,7 @@ pnpm test
 Check code style and quality:
 
 ```bash
-pnpm run prepack
+npm run prepack
 ```
 
 ## Versioning
