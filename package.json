@@ -1,6 +1,6 @@
 {
   "name": "@lightweight-clients/raiffeisen-retail-api-lightweight-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight Raiffeisen Retail API client.",
   "source": "src/client/index.ts",
   "main": "dist/index.js",
