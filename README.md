@@ -1,8 +1,8 @@
 # Raiffeisen Retail API Client
 
-[![NPM Version](https://img.shields.io/npm/v/raiffeisen-retail-api)](https://www.npmjs.com/package/raiffeisen-retail-api)
-![NPM Downloads](https://img.shields.io/npm/dm/raiffeisen-retail-api)
-![GitHub License](https://img.shields.io/github/license/raiffeisen-retail-api)
+[![NPM Version](https://img.shields.io/npm/v/@lightweight-clients/raiffeisen-retail-api-lightweight-client)](https://www.npmjs.com/package/@lightweight-clients/raiffeisen-retail-api-lightweight-client)
+![NPM Downloads](https://img.shields.io/npm/dm/@lightweight-clients/raiffeisen-retail-api-lightweight-client)
+![GitHub License](https://img.shields.io/github/license/lightweight-clients/raiffeisen-retail-api-lightweight-client)
 
 A Raiffeisen Retail API client for Node.js and the browser, fully typed with TypeScript.
 
