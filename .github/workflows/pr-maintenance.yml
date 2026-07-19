@@ -36,4 +36,4 @@ jobs:
       - name: Assign PR to maintainers
         uses: hkusu/review-assign-action@v1
         with:
-          reviewers: 'maintainers,github-copilot[bot]'
+          reviewers: 'maintainers'
