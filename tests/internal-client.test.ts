@@ -1,8 +1,6 @@
-﻿/* eslint-disable @typescript-eslint/explicit-function-return-type */
-
-import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { InternalClient } from '../src/client/internal-client.js';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { UnauthorizedError } from '../src/client/errors/unauthorized-error.js';
+import { InternalClient } from '../src/client/internal-client.js';
 
 describe('InternalClient', () => {
   const DEFAULT_RESPONSE_HEADERS_MOCK = {
@@ -36,7 +34,9 @@ describe('InternalClient', () => {
       headers: DEFAULT_RESPONSE_HEADERS_MOCK,
     };
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(mockResponse));
-    await expect(client.call('test-endpoint', {})).rejects.toThrow(UnauthorizedError);
+    await expect(client.call('test-endpoint', {})).rejects.toThrow(
+      UnauthorizedError,
+    );
   });
 
   test('should throw generic Error on other errors', async () => {
@@ -47,8 +47,9 @@ describe('InternalClient', () => {
       headers: DEFAULT_RESPONSE_HEADERS_MOCK,
     };
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(mockResponse));
-    await expect(client.call('test-endpoint', {})).rejects
-      .toThrow('API error: status 500, body: Server error');
+    await expect(client.call('test-endpoint', {})).rejects.toThrow(
+      'API error: status 500, body: Server error',
+    );
   });
 
   test('should set cookies from Set-Cookie header on first success', async () => {
@@ -62,6 +63,7 @@ describe('InternalClient', () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(mockResponse));
     await client.call('test-endpoint', {});
     // Call again, cookie should persist
+    // biome-ignore lint/complexity/useLiteralKeys: Verify private cookie persistence.
     expect(client['cookies']).toBe(setCookie);
   });
 });
@@ -73,4 +75,3 @@ describe('UnauthorizedError', () => {
     expect(err.message).toBe('msg');
   });
 });
-

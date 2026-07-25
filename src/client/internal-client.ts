@@ -5,10 +5,11 @@
  * Handles cookies and error reporting.
  */
 export class InternalClient {
-  private static readonly BASE_ENDPOINT = 'https://rol.raiffeisenbank.rs/Retail/Protected/Services';
+  private static readonly BASE_ENDPOINT =
+    'https://rol.raiffeisenbank.rs/Retail/Protected/Services';
 
   private static DEFAULT_HEADERS = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
@@ -33,7 +34,7 @@ export class InternalClient {
       method: 'POST',
       headers: {
         ...InternalClient.DEFAULT_HEADERS,
-        'Cookie': this.cookies,
+        Cookie: this.cookies,
       },
       body: JSON.stringify(body),
     });
@@ -45,11 +46,14 @@ export class InternalClient {
       this.cookies = this.cookies || response.headers.get('Set-Cookie') || '';
       return (await response.json()) as R;
     } else if (response.status === 401) {
-      throw new UnauthorizedError('Unauthorized', { cause: await response.text() });
+      throw new UnauthorizedError('Unauthorized', {
+        cause: await response.text(),
+      });
     } else {
       const bodyText = await response.text();
-      throw new Error(`API error: status ${response.status}, body: ${bodyText}`);
+      throw new Error(
+        `API error: status ${response.status}, body: ${bodyText}`,
+      );
     }
   }
 }
-

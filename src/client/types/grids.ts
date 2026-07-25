@@ -55,6 +55,6 @@ export type RetailAccountTurnoverTransactionPreviewMasterDetailS = {
 
 export type GridRow = {
   'RetailAccountBalancePreviewFlat-L': RetailAccountBalancePreviewFlatL;
-  'RetailAccountReservedFundsPreviewFlat': RetailAccountReservedFundsPreviewFlat;
+  RetailAccountReservedFundsPreviewFlat: RetailAccountReservedFundsPreviewFlat;
   'RetailAccountTurnoverTransactionPreviewMasterDetail-S': RetailAccountTurnoverTransactionPreviewMasterDetailS;
 };

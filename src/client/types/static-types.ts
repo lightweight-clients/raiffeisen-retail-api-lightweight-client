@@ -50,10 +50,13 @@ export interface AuthorizeResult {
   DaysToExpiration: number;
 }
 
-export type GridDefinitions = Record<string, {
-  Name: string;
-  Columns: { Name: string }[];
-}>;
+export type GridDefinitions = Record<
+  string,
+  {
+    Name: string;
+    Columns: { Name: string }[];
+  }
+>;
 
 export type GetSystemParametersResponse = {
   Result: {

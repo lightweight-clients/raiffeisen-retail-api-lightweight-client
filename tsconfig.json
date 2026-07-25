@@ -26,11 +26,6 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true
   },
-  "include": [
-    "src/client/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/client/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

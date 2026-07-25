@@ -1,5 +1,5 @@
-﻿import type { GridDefinitions } from '../types/static-types.js';
-import type { GridRow } from '../types/grids.js';
+﻿import type { GridRow } from '../types/grids.js';
+import type { GridDefinitions } from '../types/static-types.js';
 
 let storedGridDefinitions: Record<string, readonly string[]> | null = null;
 
@@ -11,8 +11,10 @@ let storedGridDefinitions: Record<string, readonly string[]> | null = null;
  * @throws Error if fetching grid definitions fails.
  */
 export const initGridParser = (gridDefinitions: GridDefinitions): void => {
-  const pairs = Object.values(gridDefinitions)
-    .map(def => [def.Name, def.Columns.map(col => col.Name)] as [string, string[]]);
+  const pairs = Object.values(gridDefinitions).map(
+    (def) =>
+      [def.Name, def.Columns.map((col) => col.Name)] as [string, string[]],
+  );
 
   storedGridDefinitions = Object.fromEntries(pairs);
 };
@@ -48,9 +50,7 @@ export const parseRow = <T extends keyof GridRow>(
  * @param gridName - Name of the grid to use for column definitions.
  * @returns Array of objects mapping column names to row values.
  */
-export const parseGrid = function <T extends keyof GridRow>(
+export const parseGrid = <T extends keyof GridRow>(
   data: readonly string[][],
   gridName: T,
-): GridRow[T][] {
-  return data.map(row => parseRow<T>(row, gridName));
-};
+): GridRow[T][] => data.map((row) => parseRow<T>(row, gridName));

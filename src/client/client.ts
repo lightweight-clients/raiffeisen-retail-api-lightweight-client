@@ -1,11 +1,16 @@
-﻿import { AuthorizeParams, AuthorizeResult, GetSystemParametersResponse } from './types/static-types.js';
-import {
+﻿import { initGridParser, parseGrid } from './helpers/grid-parser.js';
+import { InternalClient } from './internal-client.js';
+import type {
   GridRow,
   RetailAccountBalancePreviewFlatL,
-  RetailAccountReservedFundsPreviewFlat, RetailAccountTurnoverTransactionPreviewMasterDetailS,
+  RetailAccountReservedFundsPreviewFlat,
+  RetailAccountTurnoverTransactionPreviewMasterDetailS,
 } from './types/grids.js';
-import { InternalClient } from './internal-client.js';
-import { initGridParser, parseGrid } from './helpers/grid-parser.js';
+import type {
+  AuthorizeParams,
+  AuthorizeResult,
+  GetSystemParametersResponse,
+} from './types/static-types.js';
 
 const fetchGrid = async <Params, ApiResult, ResultName extends keyof GridRow>(
   client: InternalClient,
@@ -32,10 +37,11 @@ const fetchGrid = async <Params, ApiResult, ResultName extends keyof GridRow>(
  */
 export const getSystemParameters = async (
   client: InternalClient,
-): Promise<GetSystemParametersResponse> => client.call<object, GetSystemParametersResponse>(
-  'RetailLoginService.svc/GetSystemParametersCached',
-  {},
-);
+): Promise<GetSystemParametersResponse> =>
+  client.call<object, GetSystemParametersResponse>(
+    'RetailLoginService.svc/GetSystemParametersCached',
+    {},
+  );
 
 /**
  * Authorizes a user and returns an authenticated InternalClient instance.
@@ -45,13 +51,15 @@ export const getSystemParameters = async (
  * @returns Promise resolving to an authenticated InternalClient.
  * @throws Error if password is not 64 characters or authorization fails.
  */
-export const authorize = async function (
+export const authorize = async (
   username: string,
   hashedPassword: string,
-): Promise<InternalClient> {
+): Promise<InternalClient> => {
   if (hashedPassword.length !== 64) {
-    throw new Error('Password must be Argon2-hashed. ' +
-      'Authorize on the bank portal and find the call to /LoginFont for the correct value.');
+    throw new Error(
+      'Password must be Argon2-hashed. ' +
+        'Authorize on the bank portal and find the call to /LoginFont for the correct value.',
+    );
   }
 
   const client = new InternalClient();
@@ -71,17 +79,16 @@ export const authorize = async function (
   return client;
 };
 
-export const getAllAccountBalance = async function (
+export const getAllAccountBalance = async (
   client: InternalClient,
-): Promise<RetailAccountBalancePreviewFlatL[]> {
-  return fetchGrid<object, string[][], 'RetailAccountBalancePreviewFlat-L'>(
+): Promise<RetailAccountBalancePreviewFlatL[]> =>
+  fetchGrid<object, string[][], 'RetailAccountBalancePreviewFlat-L'>(
     client,
     'DataService.svc/GetAllAccountBalance',
     {},
-    res => res,
+    (res) => res,
     'RetailAccountBalancePreviewFlat-L',
   );
-};
 
 /**
  * Fetches reserved funds for a transactional account.
@@ -91,21 +98,20 @@ export const getAllAccountBalance = async function (
  * @returns Promise resolving to an array of reserved funds items.
  */
 export type GetTransactionalAccountReservedFundsParams = {
-  accountNumber: string,
-}
+  accountNumber: string;
+};
 
-export const getTransactionalAccountReservedFunds = async function (
+export const getTransactionalAccountReservedFunds = async (
   client: InternalClient,
   params: GetTransactionalAccountReservedFundsParams,
-): Promise<RetailAccountReservedFundsPreviewFlat[]> {
-  return fetchGrid<object, string[][], 'RetailAccountReservedFundsPreviewFlat'>(
+): Promise<RetailAccountReservedFundsPreviewFlat[]> =>
+  fetchGrid<object, string[][], 'RetailAccountReservedFundsPreviewFlat'>(
     client,
     'DataService.svc/GetTransactionalAccountReservedFunds',
     params,
-    res => res,
+    (res) => res,
     'RetailAccountReservedFundsPreviewFlat',
   );
-};
 
 /**
  * Fetches turnover transactions for a transactional account.
@@ -115,29 +121,32 @@ export const getTransactionalAccountReservedFunds = async function (
  * @returns Promise resolving to an array of turnover transaction items.
  */
 export type GetTransactionalAccountTurnoverParams = {
-  accountNumber: string,
-  productCoreID: string,
+  accountNumber: string;
+  productCoreID: string;
   filterParam: {
-    CurrencyCodeNumeric: string,
-    FromDate: string,
-    ToDate: string,
-    ItemType: string,
-    ItemCount: string,
-    FromAmount: string,
-    ToAmount: string,
-    PaymentPurpose: string
-  },
+    CurrencyCodeNumeric: string;
+    FromDate: string;
+    ToDate: string;
+    ItemType: string;
+    ItemCount: string;
+    FromAmount: string;
+    ToAmount: string;
+    PaymentPurpose: string;
+  };
 };
 
-export const getTransactionalAccountTurnover = async function (
+export const getTransactionalAccountTurnover = async (
   client: InternalClient,
   params: GetTransactionalAccountTurnoverParams,
-): Promise<RetailAccountTurnoverTransactionPreviewMasterDetailS[]> {
-  return fetchGrid<object, string[][][][], 'RetailAccountTurnoverTransactionPreviewMasterDetail-S'>(
+): Promise<RetailAccountTurnoverTransactionPreviewMasterDetailS[]> =>
+  fetchGrid<
+    object,
+    string[][][][],
+    'RetailAccountTurnoverTransactionPreviewMasterDetail-S'
+  >(
     client,
     'DataService.svc/GetTransactionalAccountTurnover',
     params,
     (response) => response[0][1],
     'RetailAccountTurnoverTransactionPreviewMasterDetail-S',
   );
-};
