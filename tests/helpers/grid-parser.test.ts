@@ -1,6 +1,10 @@
-﻿import type { GridDefinitions } from '../../src/client/index.js';
-import { describe, it, expect } from 'vitest';
-import { initGridParser, parseRow, parseGrid } from '../../src/client/helpers/grid-parser.js';
+﻿import { describe, expect, it } from 'vitest';
+import {
+  initGridParser,
+  parseGrid,
+  parseRow,
+} from '../../src/client/helpers/grid-parser.js';
+import type { GridDefinitions } from '../../src/client/index.js';
 
 describe('grid-parser', () => {
   const mockGridDefinitions: GridDefinitions = {
@@ -22,9 +26,9 @@ describe('grid-parser', () => {
   ];
 
   it('throws if grid definitions are not initialized', () => {
-    expect(() => parseRow(validRow, 'RetailAccountBalancePreviewFlat-L')).toThrow(
-      /Grid definitions not loaded/,
-    );
+    expect(() =>
+      parseRow(validRow, 'RetailAccountBalancePreviewFlat-L'),
+    ).toThrow(/Grid definitions not loaded/);
   });
 
   it('parses a single row correctly', () => {
@@ -59,4 +63,3 @@ describe('grid-parser', () => {
     ]);
   });
 });
-
